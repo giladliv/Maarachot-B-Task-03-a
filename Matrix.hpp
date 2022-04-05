@@ -12,7 +12,7 @@ namespace zich
     {
         public:
             // c'tor
-            Matrix(vector<double> mat, int row, int col);
+            Matrix(vector<double>& mat, int row, int col);
             Matrix(const Matrix& other) : _row(other._row), _col(other._col) {}
             
             // d'tor
@@ -60,17 +60,16 @@ namespace zich
             friend std::ostream& operator<< (ostream& output, const Matrix& m);
             friend std::istream& operator>> (istream& input , Matrix& m);
             
-            int getRow() {return _row;}
-            int getCol() {return _col;}
+
         private:
             /* data */
             vector<vector<double>> _mat; 
             int _row;
             int _col;
 
-            void arrToMat(vector<double> matArr, int row, int col);
-            void throwIfNotSameSize(const Matrix& a, const Matrix& b) const;
-            void throwIfMulWrong(const Matrix& a, const Matrix& b) const;
+            void arrToMat(vector<double>& matArr, int row, int col);
+            static void throwIfNotSameSize(const Matrix& a, const Matrix& b);
+            static void throwIfMulWrong(const Matrix& a, const Matrix& b);
     };
     
     

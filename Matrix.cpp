@@ -1,7 +1,7 @@
 #include "Matrix.hpp"
 using zich::Matrix;
 
-Matrix::Matrix(vector<double> mat, int row, int col)
+Matrix::Matrix(vector<double>& mat, int row, int col)
 {
     if (row <= 0 || col <= 0)
     {
@@ -17,7 +17,7 @@ Matrix::Matrix(vector<double> mat, int row, int col)
     
 }
 
-void Matrix::arrToMat(vector<double> matArr, int row, int col)
+void Matrix::arrToMat(vector<double>& matArr, int row, int col)
 {
     _mat = vector<vector<double>>();
     unsigned int ind = 0;
@@ -37,7 +37,7 @@ Matrix::~Matrix()
 {
 }
 
-void Matrix::throwIfNotSameSize(const Matrix& a, const Matrix& b) const
+void Matrix::throwIfNotSameSize(const Matrix& a, const Matrix& b)
 {
     if (a._row != b._row || a._col != b._col)
     {
@@ -45,11 +45,11 @@ void Matrix::throwIfNotSameSize(const Matrix& a, const Matrix& b) const
     }
 }
 
-void Matrix::throwIfMulWrong(const Matrix& a, const Matrix& b) const
+void Matrix::throwIfMulWrong(const Matrix& a, const Matrix& b)
 {
-    if (a._row != b._row || a._col != b._col)
+    if (a._col != b._row)
     {
-        throw MessageException("the matrixes must have same number of row and same number column");
+        throw MessageException("the number of column of the left matrix must be equal to the number of rows of the right matrix");
     }
 }
 
@@ -78,6 +78,7 @@ Matrix Matrix::operator-(const Matrix& other) const
 // * operator
 Matrix Matrix::operator*(const Matrix& other) const
 {
+    throwIfMulWrong(*this, other);
     return (*this);
 }
 
@@ -107,7 +108,7 @@ Matrix& Matrix::operator-=(const Matrix& other)
 
 Matrix& Matrix::operator*=(const Matrix& other)
 {
-    //if (this->_col )
+    throwIfMulWrong(*this, other);
     return (*this);
 }
 

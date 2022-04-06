@@ -7,7 +7,7 @@ Matrix::Matrix(vector<double>& mat, int row, int col)
     {
         throw MessageException("rows and columns must be positive numbers");
     }
-    if (row * col != mat.size())
+    if ((row * col) != mat.size())
     {
         throw MessageException("the matrix must be at the same size of: row * col");
     }
@@ -24,11 +24,11 @@ void Matrix::arrToMat(vector<double>& matArr, int row, int col)
     int len = matArr.size();
     for (unsigned int i = 0; i < row && ind < len; i++)
     {
-        _mat.push_back(vector<double>());
-        for (unsigned int j = 0; j < col && ind < len; j++)
-        {
-            _mat[i][j] = matArr[ind++];
-        }
+        auto startSub = matArr.begin() + ind;
+        auto endSub = matArr.begin() + ind + col;
+
+        _mat.push_back(vector<double>(startSub, endSub));   // get the sub vector by start iterator and end
+        ind += (unsigned int)col;
         
     }
 }
@@ -37,7 +37,7 @@ Matrix::~Matrix()
 {
 }
 
-void Matrix::throwIfNotSameSize(const Matrix& a, const Matrix& b)
+void zich::throwIfNotSameSize(const Matrix& a, const Matrix& b)
 {
     if (a._row != b._row || a._col != b._col)
     {
@@ -45,7 +45,7 @@ void Matrix::throwIfNotSameSize(const Matrix& a, const Matrix& b)
     }
 }
 
-void Matrix::throwIfMulWrong(const Matrix& a, const Matrix& b)
+void zich::throwIfMulWrong(const Matrix& a, const Matrix& b)
 {
     if (a._col != b._row)
     {
@@ -87,7 +87,7 @@ Matrix Matrix::operator*(double skalar) const
     return (*this);
 }
 
-Matrix operator*(double skalar, const Matrix& m)
+Matrix zich::operator*(double skalar, const Matrix& m)
 {
     return (m);
 }
@@ -115,4 +115,64 @@ Matrix& Matrix::operator*=(const Matrix& other)
 Matrix& Matrix::operator*=(double skalar)
 {
     return (*this);
+}
+
+Matrix& Matrix::operator++()
+{
+    return (*this);
+}
+
+Matrix& Matrix::operator--()
+{
+    return (*this);
+}
+
+Matrix Matrix::operator++(int dummy_flag_for_postfix_increment)
+{
+    return (*this);
+}
+
+Matrix Matrix::operator--(int dummy_flag_for_postfix_increment)
+{
+    return (*this);
+}
+
+bool zich::operator==(const Matrix& m1, const Matrix& m2)
+{
+    throwIfNotSameSize(m1, m2);
+    return (false);
+}
+
+bool zich::operator<(const Matrix& m1, const Matrix& m2)
+{
+    throwIfNotSameSize(m1, m2);
+    return (false);
+}
+
+bool zich::operator>(const Matrix& m1, const Matrix& m2)
+{
+    throwIfNotSameSize(m1, m2);
+    return (false);
+}
+
+bool zich::operator<=(const Matrix& m1, const Matrix& m2)
+{
+    throwIfNotSameSize(m1, m2);
+    return (false);
+}
+
+bool zich::operator>=(const Matrix& m1, const Matrix& m2)
+{
+    throwIfNotSameSize(m1, m2);
+    return (false);
+}
+
+ostream& zich::operator<< (ostream& output, const Matrix& m)
+{
+    return (output);
+}
+
+istream& zich::operator>> (istream& input , Matrix& m)
+{
+    return (input);
 }

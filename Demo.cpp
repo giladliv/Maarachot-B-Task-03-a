@@ -17,6 +17,16 @@ using namespace std;
 #include "Matrix.hpp"
 using namespace zich;
 
+string getInStr(string msg = "");
+
+string getInStr(string msg)
+{
+  string s;
+  cout << msg;
+  getline(cin, s);
+  return s;
+}
+
 int main() {
   
   std::vector<double> identity = {1, 0, 0, 0, 1, 0, 0, 0, 1};
@@ -45,5 +55,7 @@ int main() {
             [0 0 6]*/
 
   cout << "End of demo!" << endl;
+  string s = getInStr("enter: ");
+  cout << s << endl;
   return 0;
 }

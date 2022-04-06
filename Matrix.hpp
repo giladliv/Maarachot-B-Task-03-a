@@ -59,6 +59,9 @@ namespace zich
             // io operators
             friend std::ostream& operator<< (ostream& output, const Matrix& m);
             friend std::istream& operator>> (istream& input , Matrix& m);
+
+
+            
             
 
         private:
@@ -68,8 +71,10 @@ namespace zich
             int _col;
 
             void arrToMat(vector<double>& matArr, int row, int col);
-            static void throwIfNotSameSize(const Matrix& a, const Matrix& b);
-            static void throwIfMulWrong(const Matrix& a, const Matrix& b);
+            
+            friend void throwIfNotSameSize(const Matrix& a, const Matrix& b);
+            friend void throwIfMulWrong(const Matrix& a, const Matrix& b);
+            
     };
     
     

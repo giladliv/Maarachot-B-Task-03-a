@@ -13,13 +13,13 @@ namespace zich
         public:
             // c'tor
             Matrix(vector<double>& mat, int row, int col);
-            Matrix(const Matrix& other) : _row(other._row), _col(other._col) {}
+            Matrix(const Matrix& other);
             
             // d'tor
             ~Matrix();
 
             // operator =
-            //Matrix& operator=(const Matrix& other);
+            Matrix& operator=(const Matrix& other);
 
             // math operators
             // + operators
@@ -71,7 +71,7 @@ namespace zich
             int _col;
 
             void arrToMat(vector<double>& matArr, int row, int col);
-            
+
             friend void throwIfNotSameSize(const Matrix& a, const Matrix& b);
             friend void throwIfMulWrong(const Matrix& a, const Matrix& b);
             

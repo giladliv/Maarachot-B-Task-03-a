@@ -33,6 +33,21 @@ void Matrix::arrToMat(vector<double>& matArr, int row, int col)
     }
 }
 
+Matrix::Matrix(const Matrix& other)
+{
+
+}
+
+Matrix& Matrix::operator=(const Matrix& other)
+{
+    if (this == &other)
+    {
+        return (*this);
+    }
+    
+    return (*this);
+}
+
 Matrix::~Matrix()
 {
 }
